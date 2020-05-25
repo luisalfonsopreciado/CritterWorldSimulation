@@ -5,6 +5,7 @@ public class CritterWorld {
     int N, T;
     Coord escape;
     ArrayList<Coord> rockCoords;
+    public ArrayList<Cell> activeCritters;
     int numCritters;
     Cell[][] map;
 
@@ -14,7 +15,8 @@ public class CritterWorld {
         this.numCritters = critterStartCoords.size();
         this.rockCoords = rockCoords;
         this.map = new Cell[N][N];
-        escapedCritters = new ArrayList<Critter>();
+        this.escapedCritters = new ArrayList<Critter>();
+        this. activeCritters = new ArrayList<Cell>();
 
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map[row].length; col++) {
@@ -24,7 +26,7 @@ public class CritterWorld {
 
         for (Coord c : critterStartCoords) {
             map[c.row][c.col].setOccupant(Cell.CRITTER);
-            ;
+            activeCritters.add(map[c.row][c.col]);
         }
 
         for (Coord c : rockCoords) {
@@ -49,22 +51,15 @@ public class CritterWorld {
     // Return true if over.
 
     public boolean nextStep() {
-        // ... this is where you need the critterworld logic of moves,
-        // state changes, neighboring cells etc ...
-        ArrayList<Cell> seen = new ArrayList<Cell>();
-        for (int row = 0; row < map.length; row++) {
-            for (int col = 0; col < map[row].length; col++) {
-                Cell current = map[row][col];
-                if (current.getOccupant().equals(Cell.CRITTER) && (!seen.contains(current))) {
-                    seen.add(current);
-                    current.simulate(map);
-                }
-            }
+        for(Cell critterCell: activeCritters){
+            critterCell.simulate(map);
         }
-        // You'll likely need other methods otherwise this method
-        // will get too long and unwieldy.
-
+    
         return checkIsOver();
+    }
+
+    public void shuffle(){
+        Collections.shuffle(activeCritters);
     }
 
     public void printStats() {
