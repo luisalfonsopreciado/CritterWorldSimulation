@@ -15,7 +15,7 @@ public class CritterWorld {
         this.numCritters = critterStartCoords.size();
         this.rockCoords = rockCoords;
         this.map = new Cell[N][N];
-        this.escapedCritters = new ArrayList<Critter>();
+        escapedCritters = new ArrayList<Critter>();
         this. activeCritters = new ArrayList<Cell>();
 
         for (int row = 0; row < map.length; row++) {

@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.event.*; // Needed for ActionListener.
 
 class MapPanel extends JPanel implements ActionListener{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     CritterWorld world;
     JButton next;
     JButton rand;
@@ -92,6 +96,11 @@ class MapPanel extends JPanel implements ActionListener{
 }
 
 class MyFrame extends JFrame implements ActionListener {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     // Constructor.
     public MyFrame(int width, int height) {
